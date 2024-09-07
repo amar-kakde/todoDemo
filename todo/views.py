@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .models import TodoModel
 from .forms import TodoForm
@@ -16,6 +16,7 @@ def todo_add(request):
 
         if form.is_valid():
             form.save()
+            return redirect('home')
 
     form = TodoForm()
 
