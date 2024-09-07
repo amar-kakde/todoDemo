@@ -6,7 +6,9 @@ from .forms import TodoForm
 # Create your views here.
 
 def index(request):
-    return render(request, "todo/index.html", {})
+    todos = TodoModel.objects.all()
+
+    return render(request, "todo/index.html", {"todos":todos})
 
 def todo_add(request):
     if request.method == "POST":
