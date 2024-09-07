@@ -6,4 +6,10 @@
 
 {% block content %}
 <h1>Todo Update Page</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Update it</button>
+</form>
 {% endblock content %}

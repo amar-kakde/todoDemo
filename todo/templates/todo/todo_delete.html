@@ -6,4 +6,9 @@
 
 {% block content %}
 <h1>Todo Delete Page</h1>
+<form method="post">
+    {% csrf_token %}
+    <p> Do you want to delete {{todo.todo}} ?</p>
+    <button type="submit">Delete it</button>
+</form>
 {% endblock content %}
