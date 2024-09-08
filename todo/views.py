@@ -23,7 +23,7 @@ def todo_add(request):
     return render(request, "todo/todo_add.html", {"form":form})    
 
 def todo_delete(request, pk):
-    todo = TodoModel.objects.filter(id=pk)
+    todo = TodoModel.objects.filter(id=pk).first()
 
     if request.method == "POST":
         todo.delete()
@@ -43,7 +43,5 @@ def todo_update(request, pk):
     form = TodoForm(request.POST or None, instance=todo)
     return render(request, "todo/todo_update.html", {"form":form})
 
-def todo_list(request):
-    pass
 
 
