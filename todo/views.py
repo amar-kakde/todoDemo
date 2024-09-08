@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import TodoModel
 from .forms import TodoForm, CustomUserCreationForm
@@ -10,7 +11,15 @@ from .forms import TodoForm, CustomUserCreationForm
 # Create your views here.
 
 def index(request):
-    return render(request, "todo/index.html", {})
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect("home")
+
+    form = AuthenticationForm()    
+    return render(request, "todo/index.html", {"form":form})
 
 @login_required
 def todo_add(request):
