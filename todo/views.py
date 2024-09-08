@@ -32,16 +32,15 @@ def todo_delete(request, pk):
     return render(request, "todo/todo_delete.html", {"todo":todo})
 
 def todo_update(request, pk):
+    todo = TodoModel.objects.filter(id=pk).first()
+    
     if request.method == "POST":
-        form = TodoForm(request.POST)
-
+        form = TodoForm(request.POST, instance=todo)
         if form.is_valid():
             form.save()
             return redirect("home")
 
-    todo = TodoModel.objects.filter(id=pk).first()
     form = TodoForm(request.POST or None, instance=todo)
-
     return render(request, "todo/todo_update.html", {"form":form})
 
 def todo_list(request):
