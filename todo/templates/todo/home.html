@@ -29,11 +29,15 @@
                         </tr>
                     {% endfor %}
                 {% else %}
-                    <p>There are no todos.</p>
-                {% endif %}
+                     <tr><td>There are no todos.</td></tr>
+               {% endif %}
             </tbody>
         </table>
     </div>
+    <div class="text-center">
+         <a href="{% url 'todo_add' %}" class="text-white bg-blue-400"> Add Todo</a>
+    </div>
+   
 {% else %} 
     <p>
         <span>
