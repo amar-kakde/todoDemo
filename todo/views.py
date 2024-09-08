@@ -46,7 +46,7 @@ def todo_update(request, pk):
 def home(request):
     todos = TodoModel.objects.all()
 
-    return render(request, "todo/todo_list.html", {"todos":todos})
+    return render(request, "todo/home.html", {"todos":todos})
 
 
 def signup(request):
