@@ -6,34 +6,5 @@
 
 {% block content %}
 <h1>Todo Home Page</h1>
-<div class="flex items-center justify-center ">
-<table class="min-w-full divide-y divide-gray-200 table-fixed">
-    <th>
-        <tr>
-            <td>Todo</td>
-            <td>Description</td>
-            <td>Status</td>
-            <td>Date</td>
-        </tr>
-    </th>
-    <tbody>
-        {% if todos %}
-            {% for todo in todos %}
-                <tr>
-                    <td>{{todo.todo}}</td>
-                    <td>{{todo.description}}</td>
-                    <td>{{todo.status}}</td>
-                    <td>{{todo.created}}</td>
-                    <td><a href="{% url 'todo_update' todo.id %}">Update</a></td>
-                    <td><a href="{% url 'todo_delete' todo.id %}">Delete</a></td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <p>There are no todos.</p>
-        {% endif %}
-    </tbody>
-</table>
 
-
-</div>
 {% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{block.super}} - List
+{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="flex items-center justify-center ">
+        <table class="min-w-full divide-y divide-gray-200 table-fixed">
+            <th>
+                <tr>
+                    <td>Todo</td>
+                    <td>Description</td>
+                    <td>Status</td>
+                    <td>Date</td>
+                </tr>
+            </th>
+            <tbody>
+                {% if todos %}
+                    {% for todo in todos %}
+                        <tr>
+                            <td>{{todo.todo}}</td>
+                            <td>{{todo.description}}</td>
+                            <td>{{todo.status}}</td>
+                            <td>{{todo.created}}</td>
+                            <td><a href="{% url 'todo_update' todo.id %}" class="text-white bg-blue-400">Update</a></td>
+                            <td><a href="{% url 'todo_delete' todo.id %}" class="text-white bg-red-400">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>There are no todos.</p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% else %} 
+    <p>
+        <span>
+            You are not logged in.
+            <a href="{% url 'login' %}">Log in</a>
+        </span>
+    </p>
+{% endif %}
+{% endblock content %}

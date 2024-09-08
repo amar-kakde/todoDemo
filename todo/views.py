@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
 
 from .models import TodoModel
 from .forms import TodoForm
@@ -6,9 +8,7 @@ from .forms import TodoForm
 # Create your views here.
 
 def index(request):
-    todos = TodoModel.objects.all()
-
-    return render(request, "todo/index.html", {"todos":todos})
+    return render(request, "todo/index.html", {})
 
 def todo_add(request):
     if request.method == "POST":
@@ -43,5 +43,20 @@ def todo_update(request, pk):
     form = TodoForm(request.POST or None, instance=todo)
     return render(request, "todo/todo_update.html", {"form":form})
 
+def home(request):
+    todos = TodoModel.objects.all()
+
+    return render(request, "todo/todo_list.html", {"todos":todos})
 
 
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+
+    form = UserCreationForm()
+
+    return render(request, "registration/signup.html", {"form":form})
