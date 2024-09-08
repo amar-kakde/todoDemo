@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}
 {{block.super}} - Home
@@ -6,8 +6,8 @@
 
 {% block content %}
 <h1>Todo Home Page</h1>
-
-<table>
+<div class="flex items-center justify-center ">
+<table class="min-w-full divide-y divide-gray-200 table-fixed">
     <th>
         <tr>
             <td>Todo</td>
@@ -24,6 +24,7 @@
                     <td>{{todo.description}}</td>
                     <td>{{todo.status}}</td>
                     <td>{{todo.created}}</td>
+                    <td><a href="{% url 'todo_update' todo.id %}">Update</a></td>
                 </tr>
             {% endfor %}
         {% else %}
@@ -32,4 +33,6 @@
     </tbody>
 </table>
 
+
+</div>
 {% endblock content %}
