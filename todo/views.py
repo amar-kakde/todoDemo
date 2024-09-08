@@ -1,12 +1,11 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import TodoModel
-from .forms import TodoForm
+from .forms import TodoForm, CustomUserCreationForm
 
 # Create your views here.
 
@@ -59,14 +58,16 @@ def home(request):
 
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
 
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, 'your account has been created successfully.')
-            return redirect("login")
+            return redirect("home")
+        else:
+            messages.error(request, 'please correct the errors below')
 
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     return render(request, "registration/signup.html", {"form":form})

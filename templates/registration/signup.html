@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1>Sign Up Todo</h1>
-    <form method="post">
+ <form method="post">
         {% csrf_token %}
         {{form}}
         <button type="submit">Sign up</button>

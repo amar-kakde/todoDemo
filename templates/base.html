@@ -7,14 +7,17 @@
     <title>{% block title %}Todo{% endblock title %}</title>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <p>Hi {{user.username}}</p>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form>
-    {% endif %}
     {% block content %}
     {% endblock content %}
+    
+    <!--Messages-->
+    {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+        </div>
+    {% endif %}
+ 
 </body>
 </html>
